@@ -1,0 +1,28 @@
+.imgHome {
+  width: 60px;
+}
+
+.imgNF {
+  text-align: center;
+}
+
+nav a {
+margin-left: 10px;
+text-decoration: none;
+background-color: rgb(0, 255, 42);
+border-radius: 5px;
+padding: 10px;
+color: white;
+}
+
+nav {
+font-size: x-large;
+}
+
+.active {
+  color: rgb(255, 0, 0);
+}
+
+.bHomeImg {
+background: none;
+}
