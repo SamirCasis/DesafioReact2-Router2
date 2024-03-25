@@ -1,40 +1,40 @@
-import React, { createContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { createContext, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 
-export const PokeContext = createContext();
+export const PokeContext = createContext()
 
-const url = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=100';
+const url = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=100'
 
-const DataContext = ({ children }) => {
-  const [pokemonNames, setPokemonNames] = useState([]);
-  const navigate = useNavigate();
-  const params = useParams();
-
-  const getPokemon = async () => {
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      const names = data.results.map(pokemon => pokemon.name);
-      setPokemonNames(names);
-    } catch (error) {
-      console.error('Error fetching Pokemon names:', error);
-    }
-  };
+const DataProvider = ({ children }) => {
+  const [pokemon, setPokemon] = useState([])
+  const [selectedPokemon, setSelectedPokemon] = useState('')
+  const navigate = useNavigate()
+  const params = useParams()
 
   useEffect(() => {
-    getPokemon();
-  }, []);
+    const getPokemon = async () => {
+      try {
+        const response = await fetch(url)
+        const data = await response.json()
+        const names = data.results.map(pokemon => pokemon.name)
+        setPokemon(names)
+      } catch (error) {
+        console.error('No se encuentra la información', error)
+      }
+    }
+    getPokemon()
+  }, [])
 
-  const handleSelectPokemon = (name) => {
-    navigate(`/pokemons/${name}`);
-  };
+  const seleccionarPokemon = (name) => {
+    setSelectedPokemon(name)
+    navigate(`/pokemons/${name}`)
+  }
 
   return (
-    <PokeContext.Provider value={{ pokemonNames, handleSelectPokemon, selectedPokemon: params.name }}>
+    <PokeContext.Provider value={{ pokemon, seleccionarPokemon, selectedPokemon }}>
       {children}
     </PokeContext.Provider>
-  );
-};
+  )
+}
 
-export default DataContext;
-
+export default DataProvider
