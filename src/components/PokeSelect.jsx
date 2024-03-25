@@ -1,27 +1,30 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react'
+import { PokeContext } from './DataContext'
+import { useNavigate } from 'react-router-dom'
 
 const PokeSelect = () => {
-  const [name, setName] = useState('');
-  const navigate = useNavigate();
+  const { pokemonNames, handleSelectPokemon } = useContext(PokeContext)
+  const [pokeNameSelect, setPokeNameSelect] = useState('')
+  const navigate = useNavigate()
 
   const irAPokemon = () => {
-    navigate(`/pokemons/${name}`);
+    handleSelectPokemon(pokeNameSelect)
+    navigate(`/pokemons/${pokeNameSelect}`)
   }
 
   return (
     <section className="seleccionador">
       <h1>GOTTA CATCH 'EM ALL'</h1>
-      <select name="selecciona" id={name} onChange={({ target }) => setName(target.value)}>
+      <select name="selecciona" value={pokeNameSelect} onChange={({ target }) => setPokeNameSelect(target.value)}>
         <option value="">Selecciona un Pokémon</option>
-        <option value="bulbasaur">Bulbasaur</option>
-        <option value="charmander">Charmander</option>
-        <option value="squirtle">Squirtle</option>
+        {pokemonNames.map(pokemon => (
+          <option key={pokemon.id} value={pokemon.name}>{pokemon.name}</option>
+        ))}
       </select>
-      <button onClick={irAPokemon}>Buscar</button>
+      <button onClick={irAPokemon}>Obtener Pokemon</button>
     </section>
-  );
+  )
 }
 
-export default PokeSelect;
+export default PokeSelect
 
