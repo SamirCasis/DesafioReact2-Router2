@@ -1,10 +1,8 @@
+import PokeSelect from "../components/PokeSelect"
+
 const PokeView = () => {
     return (
-      <>
-      <div>
-        <p>PokeView</p>
-        </div>
-      </>
+  <PokeSelect />
     )
   }
   

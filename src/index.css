@@ -26,3 +26,14 @@ font-size: x-large;
 .bHomeImg {
 background: none;
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.imgLogo {
+  width: 400px;
+}

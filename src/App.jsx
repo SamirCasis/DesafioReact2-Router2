@@ -9,8 +9,8 @@ const App = () => {
     <>
       <Navigation />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/pokemons/:name' element={<PokeView />} />
+        <Route path='/' element={<PokeView />} />
+        <Route path='/pokemons/:name' element={<Home />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </>
