@@ -12,7 +12,7 @@ const Navigation = () => {
         <Link className='bHomeImg' to='/'> <img className='imgHome' src='https://upload.wikimedia.org/wikipedia/commons/5/51/Pokebola-pokeball-png-0.png' alt='' /> </Link>
         <Nav className='navButtons ms-auto m-3'>
           <NavLink className={setActiveClass} to='/'> Inicio </NavLink>
-          <NavLink className={setActiveClass} to='/PokeView'> Pokemons </NavLink>
+          <NavLink className={setActiveClass} to='/PokeSelect'> Pokemons </NavLink>
         </Nav>
       </Container>
     </Navbar>
