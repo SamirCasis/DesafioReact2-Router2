@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PokemonContext } from '../context/DataContext'
+import Swal from 'sweetalert2'
 
 const PokemonSelector = () => {
   const { pokemon } = useContext(PokemonContext)
@@ -14,12 +15,17 @@ const PokemonSelector = () => {
   const handleNavigate = () => {
     if (selectedPokemon) {
       navigate(`/pokemon/${selectedPokemon}`)
+    } else {
+      Swal.fire('Debes seleccionar una opción')
     }
   }
 
   return (
-    <div>
-      <h2>Selecciona un Pokémon:</h2>
+    <section className='mainSelect'>
+      <article className='SelectHead'>
+        <h1>ELIGE TU </h1>
+        <img className='imgLogo' src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1920px-International_Pok%C3%A9mon_logo.svg.png' alt='imagen logo oficial' />
+      </article>
       <select value={selectedPokemon} onChange={handleSelectChange}>
         <option value=''>Selecciona un Pokémon</option>
         {pokemon.map(poke => (
@@ -29,7 +35,7 @@ const PokemonSelector = () => {
         ))}
       </select>
       <button onClick={handleNavigate}>Ver Detalles</button>
-    </div>
+    </section>
   )
 }
 

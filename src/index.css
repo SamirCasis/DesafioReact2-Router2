@@ -7,16 +7,17 @@
 }
 
 nav a {
-margin-left: 10px;
-text-decoration: none;
-background-color: rgb(0, 255, 42);
-border-radius: 5px;
-padding: 10px;
-color: white;
+  margin-left: 10px;
+  text-decoration: none;
+  background-color: rgb(0, 255, 42);
+  border-radius: 5px;
+  padding: 10px;
+  color: rgba(18, 18, 187, 0.603);
+  font-weight: 500;
 }
 
 nav {
-font-size: x-large;
+  font-size: x-large;
 }
 
 .active {
@@ -24,7 +25,7 @@ font-size: x-large;
 }
 
 .bHomeImg {
-background: none;
+  background: none;
 }
 
 main {
@@ -40,9 +41,49 @@ main {
 
 .seleccionador {
   margin-top: 50px;
-text-align: center;
+  text-align: center;
 }
 
 .seleccionador button {
   margin-top: 40px;
+}
+
+.mainSelect {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+  margin-left: 25%;
+  border: solid rgba(119, 0, 255, 0.89) 10px;
+  margin-top: 80px;
+  padding-bottom: 3%;
+  border-style:dashed;
+}
+
+.SelectHead {
+  display: flex;
+  max-height: 100px;
+  text-align: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.SelectHead img {
+  backface-visibility: hidden;
+  margin-left: 20px;
+}
+
+section select {
+  margin-top: 70px;
+  width: 40%;
+  background-color: rgb(63, 58, 58);
+  color: white;
+}
+
+section button {
+  margin-top: 20px;
+  color: white;
+  background-color: rgba(4, 116, 221, 0.541);
+  border-radius: 20px;
+  width: 15%;
 }
