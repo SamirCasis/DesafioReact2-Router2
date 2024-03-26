@@ -8,7 +8,7 @@ const App = () => {
       <Navigation />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/pokemons' element={<PokeView />} />
+        <Route path='/PokeView' element={<PokeView />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </>

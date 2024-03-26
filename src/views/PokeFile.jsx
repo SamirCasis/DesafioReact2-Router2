@@ -1,8 +1,8 @@
-import PokeCard from "../components/PokeCard"
+import PokeCard from '../components/PokeCard'
 
 const PokeFile = () => {
   return (
-   <PokeCard/>
+    <PokeCard />
   )
 }
 

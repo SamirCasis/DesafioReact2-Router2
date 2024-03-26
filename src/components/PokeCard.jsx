@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
-import { PokeContext } from '../context/DataContext'
+import { PokemonContext } from '../context/DataContext'
 import Card from 'react-bootstrap/Card'
 
 const PokeCard = () => {
-  const { selectedPokemon } = useContext(PokeContext)
+  const { selectedPokemon } = useContext(PokemonContext)
 
   return (
     <Card

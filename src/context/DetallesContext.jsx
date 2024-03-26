@@ -6,7 +6,7 @@ const PokemonsProvider = ({ children }) => {
   const [pokemon, setPokemon] = useState([])
   const [selectedPokemon, setSelectedPokemon] = useState('')
 
-  const url = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=100'
+  const url = 'https://pokeapi.co/api/v2/pokemon/{id or name}/'
 
   useEffect(() => {
     const getPokemon = async () => {

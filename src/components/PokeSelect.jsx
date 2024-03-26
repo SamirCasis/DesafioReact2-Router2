@@ -1,35 +1,36 @@
-import { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { PokeContext } from '../context/DataContext'
-import Swal from 'sweetalert2'
+import { PokemonContext } from '../context/DataContext'
 
-const PokeSelect = () => {
-  const { pokemon, seleccionarPokemon } = useContext(PokeContext)
-  const [pokeNameSelect, setPokeNameSelect] = useState('')
+const PokemonSelector = () => {
+  const { pokemon } = useContext(PokemonContext)
   const navigate = useNavigate()
+  const [selectedPokemon, setSelectedPokemon] = useState('')
 
-  const irAPokemon = () => {
-    if (pokeNameSelect) {
-      seleccionarPokemon(pokeNameSelect)
-      const formattedName = encodeURIComponent(pokeNameSelect.toLowerCase())
-      navigate(`/pokemons/${formattedName}`)
-    } else {
-      Swal.fire('Por favor selecciona un Pokémon antes de buscar.')
+  const handleSelectChange = (event) => {
+    setSelectedPokemon(event.target.value)
+  }
+
+  const handleNavigate = () => {
+    if (selectedPokemon) {
+      navigate(`/pokemon/${selectedPokemon}`)
     }
   }
 
   return (
-    <section className='seleccionador'>
-      <h1>GOTTA CATCH 'EM ALL'</h1>
-      <select name='selecciona' value={pokeNameSelect} onChange={({ target }) => setPokeNameSelect(target.value)}>
-        <option value='name'>Selecciona un Pokémon</option>
-        {pokemon.map((name) => (
-          <option key={name} value={name}>{name}</option>
+    <div>
+      <h2>Selecciona un Pokémon:</h2>
+      <select value={selectedPokemon} onChange={handleSelectChange}>
+        <option value=''>Selecciona un Pokémon</option>
+        {pokemon.map(poke => (
+          <option key={poke.name} value={poke.name}>
+            {poke.name}
+          </option>
         ))}
       </select>
-      <button onClick={irAPokemon}>Buscar</button>
-    </section>
+      <button onClick={handleNavigate}>Ver Detalles</button>
+    </div>
   )
 }
 
-export default PokeSelect
+export default PokemonSelector
