@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
-import { PokeContext } from "../context/DataContext";
-import Card from 'react-bootstrap/Card';
+import React, { useContext } from 'react'
+import { PokeContext } from '../context/DataContext'
+import Card from 'react-bootstrap/Card'
 
 const PokeCard = () => {
-  const { selectedPokemon } = useContext(PokeContext);
+  const { selectedPokemon } = useContext(PokeContext)
 
   return (
     <Card
-      bg="primary"
-      text="white"
+      bg='primary'
+      text='white'
       style={{ width: '18rem' }}
-      className="mb-2"
+      className='mb-2'
     >
       <Card.Header>{selectedPokemon.name} Card</Card.Header>
       <Card.Body>
@@ -21,7 +21,7 @@ const PokeCard = () => {
         </Card.Text>
       </Card.Body>
     </Card>
-  );
-};
+  )
+}
 
-export default PokeCard;
+export default PokeCard
