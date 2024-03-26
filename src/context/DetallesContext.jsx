@@ -1,38 +1,43 @@
-import { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
-export const PokemonContext = createContext()
+export const DetallesContext = createContext()
 
-const PokemonsProvider = ({ children }) => {
-  const [pokemon, setPokemon] = useState([])
-  const [selectedPokemon, setSelectedPokemon] = useState('')
-
-  const url = 'https://pokeapi.co/api/v2/pokemon/{id or name}/'
-
+const DetallesProvider = ({ children }) => {
+  const [pokemonDetalles, setPokemonDetalles] = useState('')
+  const { id } = useParams()
+  
   useEffect(() => {
-    const getPokemon = async () => {
+    const url2 = `https://pokeapi.co/api/v2/pokemon/${id}`
+    const getPokemonDetalles = async () => {
       try {
-        const response = await fetch(url)
+        const response = await fetch(url2)
         if (!response.ok) {
-          throw new Error('No se obtuvo la información')
+          throw new Error('No se pudo obtener la información del Pokémon')
         }
         const data = await response.json()
-        setPokemon(data.results)
+        const pokemonInfo = {
+          id: data.id,
+          name: data.name,
+          image: data.sprites.front_default,
+          type: data.types.type.name,
+        }
+        setPokemonDetalles(pokemonInfo)
       } catch (error) {
-        console.error('Error fetching Pokémon data:', error)
+        console.error('Error al obtener detalles del Pokémon:', error)
       }
     }
-    getPokemon()
-  }, [])
 
-  const handleSelectPokemon = (pokemon) => {
-    setSelectedPokemon(pokemon)
-  }
+    if (id) {
+      getPokemonDetalles()
+    }
+  }, [id])
 
   return (
-    <PokemonContext.Provider value={{ pokemon, selectedPokemon, handleSelectPokemon }}>
+    <DetallesContext.Provider value={{pokemonDetalles, setPokemonDetalles}}>
       {children}
-    </PokemonContext.Provider>
+    </DetallesContext.Provider>
   )
 }
 
-export default PokemonsProvider
+export default DetallesProvider

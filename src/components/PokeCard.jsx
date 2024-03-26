@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
-import { PokemonContext } from '../context/DataContext'
+import { DetallesContext } from '../context/DetallesContext'
 import Card from 'react-bootstrap/Card'
 
 const PokeCard = () => {
-  const { selectedPokemon } = useContext(PokemonContext)
+  const { pokemonDetalles } = useContext(DetallesContext)
 
   return (
     <Card
@@ -12,12 +12,12 @@ const PokeCard = () => {
       style={{ width: '18rem' }}
       className='mb-2'
     >
-      <Card.Header>{selectedPokemon.name} Card</Card.Header>
+      <Card.Header>ID: {pokemonDetalles.id} </Card.Header>
       <Card.Body>
-        <Card.Title>{selectedPokemon.name} Card Title </Card.Title>
+        <Card.Title>{pokemonDetalles.name} Card Title</Card.Title>
         <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+          <img src={pokemonDetalles.image} alt={pokemonDetalles.name} />
+          Type: {pokemonDetalles.type}
         </Card.Text>
       </Card.Body>
     </Card>
@@ -25,3 +25,5 @@ const PokeCard = () => {
 }
 
 export default PokeCard
+
+
