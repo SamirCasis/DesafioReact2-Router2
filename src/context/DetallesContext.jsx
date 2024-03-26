@@ -1,14 +1,14 @@
-import React, { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 export const DetallesContext = createContext()
 
 const DetallesProvider = ({ children }) => {
-  const [pokemonDetalles, setPokemonDetalles] = useState('')
-  const { id } = useParams()
-  
+  const [pokemonDetalles, setPokemonDetalles] = useState([])
+  const { name } = useParams()
+  const url2 = `https://pokeapi.co/api/v2/pokemon`
+
   useEffect(() => {
-    const url2 = `https://pokeapi.co/api/v2/pokemon/${id}`
     const getPokemonDetalles = async () => {
       try {
         const response = await fetch(url2)
@@ -16,25 +16,24 @@ const DetallesProvider = ({ children }) => {
           throw new Error('No se pudo obtener la información del Pokémon')
         }
         const data = await response.json()
-        const pokemonInfo = {
-          id: data.id,
-          name: data.name,
-          image: data.sprites.front_default,
-          type: data.types.type.name,
-        }
-        setPokemonDetalles(pokemonInfo)
+        const img = data.sprites.other.dream_world.front_default
+        const stats = data.stats.map((stat) => ({
+          name: stat.stat.name,
+          base: stat.base_stat
+        }))
+        const types = data.types.map(({ type }) => type.name).join('')
+        setPokemonDetalles({ name, stats, img, types })
       } catch (error) {
         console.error('Error al obtener detalles del Pokémon:', error)
       }
     }
 
-    if (id) {
-      getPokemonDetalles()
-    }
-  }, [id])
+
+    getPokemonDetalles(name)
+  }, [name])
 
   return (
-    <DetallesContext.Provider value={{pokemonDetalles, setPokemonDetalles}}>
+    <DetallesContext.Provider value={{ pokemonDetalles, setPokemonDetalles }}>
       {children}
     </DetallesContext.Provider>
   )

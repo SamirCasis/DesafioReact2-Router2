@@ -1,29 +1,31 @@
 import React, { useContext } from 'react'
+import { Card } from 'react-bootstrap'
 import { DetallesContext } from '../context/DetallesContext'
-import Card from 'react-bootstrap/Card'
 
 const PokeCard = () => {
-  const { pokemonDetalles } = useContext(DetallesContext)
+  const { setPokemonDetalles } = useContext(DetallesContext)
+  const { name, stats, img, types } = setPokemonDetalles
 
   return (
-    <Card
-      bg='primary'
-      text='white'
-      style={{ width: '18rem' }}
-      className='mb-2'
-    >
-      <Card.Header>ID: {pokemonDetalles.id} </Card.Header>
+    <Card bg='primary' text='white' style={{ width: '18rem' }} className='mb-2'>
+      <Card.Img variant="top" src={img} />
       <Card.Body>
-        <Card.Title>{pokemonDetalles.name} Card Title</Card.Title>
+        <Card.Title>{name}</Card.Title>
         <Card.Text>
-          <img src={pokemonDetalles.image} alt={pokemonDetalles.name} />
-          Type: {pokemonDetalles.type}
+          {stats && (
+            <ul>
+              {stats.map((stat, id) => (
+                <li key={id}>
+                  {stat.name}: {stat.base}
+                </li>
+              ))}
+            </ul>
+          )}
         </Card.Text>
+        <Card.Text>{types}</Card.Text>
       </Card.Body>
     </Card>
   )
 }
 
 export default PokeCard
-
-
