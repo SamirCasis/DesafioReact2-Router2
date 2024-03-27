@@ -57,7 +57,7 @@ main {
   border: solid rgba(119, 0, 255, 0.89) 10px;
   margin-top: 80px;
   padding-bottom: 3%;
-  border-style:dashed;
+  border-style: dashed;
 }
 
 .SelectHead {
@@ -86,4 +86,9 @@ section button {
   background-color: rgba(4, 116, 221, 0.541);
   border-radius: 20px;
   width: 15%;
+}
+
+.cardMain {
+  margin-left: 40%;
+  margin-top: 3%;
 }

@@ -29,8 +29,8 @@ const PokemonSelector = () => {
       <select id="pokemonSelect" value={selectedPokemon} onChange={handleSelectChange}>
         <option value=''>Selecciona un Pokémon</option>
         {pokemon.map(poke => (
-          <option 
-            key={poke.name} 
+          <option
+            key={poke.name}
             value={poke.name}
           >
             {poke.name}

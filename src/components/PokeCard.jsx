@@ -1,27 +1,31 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Card } from 'react-bootstrap'
 import { DetallesContext } from '../context/DetallesContext'
+import { useParams } from 'react-router-dom'
 
 const PokeCard = () => {
-  const { setPokemonDetalles } = useContext(DetallesContext)
-  const { name, stats, img, types } = setPokemonDetalles
+  const { pokemonDetalles, getPokemonDetalles } = useContext(DetallesContext)
+  const { name, stats, src, types } = pokemonDetalles
+  const { id } = useParams()
+
+  useEffect(() => {
+    getPokemonDetalles(id)
+  }, [id, getPokemonDetalles])
 
   return (
-    <Card bg='primary' text='white' style={{ width: '18rem' }} className='mb-2'>
-      <Card.Img variant="top" src={img} />
+    <Card bg='primary' text='white' style={{ width: '18rem' }} className='cardMain mb-2 border-4'>
+      <Card.Img variant="top" src={src} />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
-        <Card.Text>
-          {stats && (
-            <ul>
-              {stats.map((stat, id) => (
-                <li key={id}>
-                  {stat.name}: {stat.base}
-                </li>
-              ))}
-            </ul>
-          )}
-        </Card.Text>
+        {stats && (
+          <ul>
+            {stats.map((stat, index) => (
+              <li key={index}>
+                {stat.name}: {stat.base}
+              </li>
+            ))}
+          </ul>
+        )}
         <Card.Text>{types}</Card.Text>
       </Card.Body>
     </Card>

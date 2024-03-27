@@ -1,39 +1,41 @@
-import { createContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { createContext, useEffect, useState } from 'react'
 
 export const DetallesContext = createContext()
 
 const DetallesProvider = ({ children }) => {
-  const [pokemonDetalles, setPokemonDetalles] = useState([])
-  const { name } = useParams()
-  const url2 = `https://pokeapi.co/api/v2/pokemon`
+  const [pokemonDetalles, setPokemonDetalles] = useState({})
+
+  const getPokemonDetalles = async (id) => {
+    try {
+      const url = `https://pokeapi.co/api/v2/pokemon/${id}`
+      const response = await fetch(url)
+      if (!response.ok) {
+        throw new Error('No se pudo obtener la información del Pokémon')
+      }
+      const data = await response.json()
+      const src = data.sprites.other.home.front_default
+      const stats = data.stats.map((stat) => ({
+        name: stat.stat.name,
+        base: stat.base_stat
+      }))
+      const types = data.types.map(({ type }) => type.name)
+      return { name: data.name, stats, src, types }
+    } catch (error) {
+      console.error('Error al obtener detalles del Pokémon:', error)
+      return ['']
+    }
+  }
 
   useEffect(() => {
-    const getPokemonDetalles = async () => {
-      try {
-        const response = await fetch(url2)
-        if (!response.ok) {
-          throw new Error('No se pudo obtener la información del Pokémon')
-        }
-        const data = await response.json()
-        const img = data.sprites.other.dream_world.front_default
-        const stats = data.stats.map((stat) => ({
-          name: stat.stat.name,
-          base: stat.base_stat
-        }))
-        const types = data.types.map(({ type }) => type.name).join('')
-        setPokemonDetalles({ name, stats, img, types })
-      } catch (error) {
-        console.error('Error al obtener detalles del Pokémon:', error)
+    getPokemonDetalles(7).then(details => {
+      if (details) {
+        setPokemonDetalles(details)
       }
-    }
-
-
-    getPokemonDetalles(name)
-  }, [name])
+    })
+  }, [])
 
   return (
-    <DetallesContext.Provider value={{ pokemonDetalles, setPokemonDetalles }}>
+    <DetallesContext.Provider value={{ pokemonDetalles, setPokemonDetalles, getPokemonDetalles }}>
       {children}
     </DetallesContext.Provider>
   )

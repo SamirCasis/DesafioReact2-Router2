@@ -16,7 +16,6 @@ const PokemonsProvider = ({ children }) => {
           throw new Error('No se obtuvo la información')
         }
         const data = await response.json()
-        console.log(data.results)
         setPokemon(data.results)
       } catch (error) {
         console.error('Error fetching Pokémon data:', error)
