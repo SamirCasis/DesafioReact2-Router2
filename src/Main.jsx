@@ -5,15 +5,12 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import PokemonsProvider from './context/DataContext.jsx'
-import DetallesProvider from './context/DetallesContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <PokemonsProvider>
-        <DetallesProvider>
-          <App />
-        </DetallesProvider>
+        <App />
       </PokemonsProvider>
     </BrowserRouter>
   </React.StrictMode>

@@ -14,7 +14,7 @@ const PokemonSelector = () => {
 
   const handleNavigate = () => {
     if (selectedPokemon) {
-      navigate(`/Pokemon/${selectedPokemon}`)
+      navigate(`/Pokemons/${selectedPokemon}`)
     } else {
       Swal.fire('Debes seleccionar una opción')
     }
@@ -26,9 +26,9 @@ const PokemonSelector = () => {
         <h1>ELIGE TU </h1>
         <img className='imgLogo' src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1920px-International_Pok%C3%A9mon_logo.svg.png' alt='imagen logo oficial' />
       </article>
-      <select id="pokemonSelect" value={selectedPokemon} onChange={handleSelectChange}>
+      <select value={selectedPokemon} onChange={handleSelectChange}>
         <option value=''>Selecciona un Pokémon</option>
-        {pokemon.map(poke => (
+        {pokemon?.map(poke => (
           <option
             key={poke.name}
             value={poke.name}
@@ -43,4 +43,3 @@ const PokemonSelector = () => {
 }
 
 export default PokemonSelector
-

@@ -88,7 +88,23 @@ section button {
   width: 15%;
 }
 
+.card-body .title {
+  font-size: xx-large;
+  text-align: center;
+  text-transform: capitalize;
+}
+
 .cardMain {
   margin-left: 40%;
   margin-top: 3%;
+  font-size: large;
+}
+
+.card-text {
+  background-color:rgb(173, 172, 171);
+  border-radius: 20px;
+  text-align: center;
+  gap: 10px;
+  color: black;
+  font-size: x-large;
 }

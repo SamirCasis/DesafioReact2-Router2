@@ -8,8 +8,8 @@ const App = () => {
       <Navigation />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/PokeView' element={<PokeView />} />
-        <Route path='/Pokemon/:name' element={<PokeFile />} />
+        <Route path='/Pokemons' element={<PokeView />} />
+        <Route path='/Pokemons/:name' element={<PokeFile />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </>
