@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 const Details = () => {
   const { name } = useParams()
-  const [pokemon, setPokemon] = useState({})
+  const [pokemonDetalle, setPokemonDetalle] = useState({})
 
   const url = 'https://pokeapi.co/api/v2/pokemon'
 
@@ -21,7 +21,7 @@ const Details = () => {
         base: stat.base_stat
       }))
       const type = data.types.map(({ type }) => type.name).join(' ')
-      setPokemon({ name, stats, img, type })
+      setPokemonDetalle({ name, stats, img, type })
     } catch (error) {
       console.log(error)
     }
@@ -33,7 +33,7 @@ const Details = () => {
 
   return (
     <>
-      <PokesCard pokemon={pokemon} />
+      <PokesCard pokemon={pokemonDetalle} />
     </>
   )
 }

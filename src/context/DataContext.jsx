@@ -9,7 +9,7 @@ const PokemonsProvider = ({ children }) => {
   const url = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=100'
 
   useEffect(() => {
-    const getPokemon = async () => {
+    const getPokemonName = async () => {
       try {
         const response = await fetch(url)
         if (!response.ok) {
@@ -21,15 +21,15 @@ const PokemonsProvider = ({ children }) => {
         console.error('Error fetching Pokémon data:', error)
       }
     }
-    getPokemon()
+    getPokemonName()
   }, [])
 
-  const handleSelectPokemon = (pokemon) => {
+  const pokeHandle = (pokemon) => {
     setSelectedPokemon(pokemon)
   }
 
   return (
-    <PokemonContext.Provider value={{ pokemon, selectedPokemon, handleSelectPokemon }}>
+    <PokemonContext.Provider value={{ pokemon, selectedPokemon, pokeHandle }}>
       {children}
     </PokemonContext.Provider>
   )
